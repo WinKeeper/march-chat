@@ -22,6 +22,7 @@ public class ServerApp {
             int countMsg = 0;
             //Ожидаем ввода информации (биты) в InputStream
             while (true) {
+                //Считываем вход от КЛИЕНТА
                 String msg = in.readUTF();
                 switch (msg) {
                     case "/stat":

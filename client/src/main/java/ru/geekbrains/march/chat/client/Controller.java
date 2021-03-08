@@ -34,11 +34,15 @@ public class Controller implements Initializable {
             //Создаём обёртку для потоков для функционала
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
-            //Два цикла не могут работать одновременно - используем потоки
+            //Два цикла не могут работать одновременно (исполнение зависает на while
+            // и не двигается дальше - используем поток
             Thread t = new Thread(() -> {
                 try {
                     while (true) {
+                        //Считываем вход от СЕРВЕРА
                         String msg = in.readUTF();
+
+                        //Проверяем информацию которая пришла
                         switch (msg) {
                             case "/exit":
                                 msgArea.appendText("Соединение прервано со стороны сервера." + "\n");
